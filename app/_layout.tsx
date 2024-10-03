@@ -1,19 +1,25 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+  Poppins_300Light,
+} from "@expo-google-fonts/poppins";
+import { SplashScreen, Stack } from "expo-router";
+import { useEffect } from "react";
+import {
+  configureFonts,
+  MD2LightTheme,
+  PaperProvider,
+} from "react-native-paper";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  // load fonts
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    Poppins_300Light,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
   });
 
   useEffect(() => {
@@ -26,12 +32,47 @@ export default function RootLayout() {
     return null;
   }
 
+  const _fontConfig = {
+    ...MD2LightTheme.fonts,
+    default: {
+      regular: {
+        fontFamily: "Poppins_400Regular",
+        fontSize: "normal",
+      },
+      medium: {
+        fontFamily: "Poppins_600SemiBold",
+        fontWeight: "normal",
+      },
+      light: {
+        fontFamily: "Poppins_300Light",
+        fontWeight: "normal",
+      },
+      thin: {
+        fontFamily: "Poppins_300Light",
+        fontWeight: "normal",
+      },
+    },
+  } as const;
+
+  const fontConfig = {
+    ios: _fontConfig.default,
+    android: _fontConfig.default,
+    web: _fontConfig.default,
+  } as const;
+
+  const theme = {
+    ...MD2LightTheme,
+    fonts: configureFonts({
+      config: fontConfig,
+      isV3: false,
+    }),
+  };
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <PaperProvider theme={theme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
-    </ThemeProvider>
+    </PaperProvider>
   );
 }
