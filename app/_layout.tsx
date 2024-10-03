@@ -5,6 +5,7 @@ import {
   Poppins_300Light,
 } from "@expo-google-fonts/poppins";
 import { SplashScreen, Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import {
   configureFonts,
@@ -70,9 +71,11 @@ export default function RootLayout() {
 
   return (
     <PaperProvider theme={theme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" />
       </Stack>
+      <StatusBar style="dark" />
     </PaperProvider>
   );
 }

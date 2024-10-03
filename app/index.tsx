@@ -1,6 +1,6 @@
+import { router } from "expo-router";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import { Text, TextInput } from "react-native-paper";
+import { Button, View } from "react-native";
 
 export default function Index() {
   const [text, setText] = React.useState("");
@@ -13,7 +13,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Button title="Go to tabs" onPress={() => router.push("/(tabs)/home")} />
     </View>
   );
 }
