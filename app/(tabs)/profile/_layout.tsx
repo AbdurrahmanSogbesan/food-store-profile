@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { router, Stack } from "expo-router";
-import { Icon } from "react-native-paper";
+import { Icon, IconButton } from "react-native-paper";
 import icons from "@/constants/icons";
 
 const InnerHeader = ({
@@ -21,9 +21,13 @@ const InnerHeader = ({
   return (
     <View style={[$innerHeader, styles]}>
       <View style={$innerHeaderContent}>
-        <Pressable onPress={() => router.navigate("/(tabs)/profile/")}>
-          <Icon source={icons.arrowLeft} size={20} />
-        </Pressable>
+        <IconButton
+          icon={icons.caretLeft}
+          size={20}
+          onPress={() => router.back()}
+          containerColor="transparent"
+        />
+
         <Text
           style={{
             fontFamily: "Poppins_300Light",
@@ -57,6 +61,24 @@ export default function ProfileLayout() {
         name="details"
         options={{
           header: () => <InnerHeader title="Edit Details" />,
+        }}
+      />
+      <Stack.Screen
+        name="shopping-list"
+        options={{
+          header: () => <InnerHeader title="Shopping List" />,
+        }}
+      />
+      <Stack.Screen
+        name="wallet"
+        options={{
+          header: () => <InnerHeader title="Wallet" />,
+        }}
+      />
+      <Stack.Screen
+        name="address"
+        options={{
+          header: () => <InnerHeader title="Address" />,
         }}
       />
     </Stack>

@@ -22,7 +22,7 @@ const profileButtons = [
   {
     icon: icons.shopping,
     title: "Shopping List",
-    // onPress: () => router.push("/(tabs)/profile/shopping-list"),
+    onPress: () => router.push("/(tabs)/profile/shopping-list"),
   },
   {
     icon: icons.shopping,
@@ -32,12 +32,12 @@ const profileButtons = [
   {
     icon: icons.creditCard,
     title: "Wallet",
-    // onPress: () => router.push("/(tabs)/profile/wallet"),
+    onPress: () => router.push("/(tabs)/profile/wallet"),
   },
   {
     icon: icons.location,
     title: "Addresses",
-    // onPress: () => router.push("/(tabs)/profile/address"),
+    onPress: () => router.push("/(tabs)/profile/address"),
   },
   {
     icon: icons.support,

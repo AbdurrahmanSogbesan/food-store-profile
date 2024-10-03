@@ -1,6 +1,5 @@
 import icons from "@/constants/icons";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
-import { router, Tabs, useRouter } from "expo-router";
+import { Tabs } from "expo-router";
 import { ImageSourcePropType, View } from "react-native";
 import { Icon, Text } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -38,33 +37,30 @@ export default function TabsLayout() {
   return (
     <>
       <Tabs
-        screenOptions={({ route }) => {
-          console.log("route.path", route);
-          return {
-            tabBarShowLabel: false,
-            tabBarActiveTintColor: "#38B000",
-            tabBarInactiveTintColor: "#909090",
-            tabBarStyle: {
-              backgroundColor: "#fff",
-              borderTopWidth: 0.5,
-              borderTopColor: "#909090",
-              height: bottom + 61,
-              paddingVertical: 8,
-            },
-            headerStyle: {
-              backgroundColor: "#C3FBAB82",
-              height: 119,
-            },
-            headerTitleAlign: "left",
+        screenOptions={({ route }) => ({
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: "#38B000",
+          tabBarInactiveTintColor: "#909090",
+          tabBarStyle: {
+            backgroundColor: "#fff",
+            borderTopWidth: 0.5,
+            borderTopColor: "#909090",
+            height: bottom + 61,
+            paddingVertical: 8,
+          },
+          headerStyle: {
+            backgroundColor: "#C3FBAB82",
+            height: 119,
+          },
+          headerTitleAlign: "left",
 
-            headerTitleStyle: {
-              fontFamily: "Poppins_300Light",
-              fontSize: 32,
-              lineHeight: 48,
-              paddingLeft: 12,
-            },
-          };
-        }}
+          headerTitleStyle: {
+            fontFamily: "Poppins_300Light",
+            fontSize: 32,
+            lineHeight: 48,
+            paddingLeft: 12,
+          },
+        })}
         initialRouteName="home"
       >
         <Tabs.Screen

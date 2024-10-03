@@ -9,7 +9,11 @@ const location = require("../assets/icons/location.png");
 const support = require("../assets/icons/support.png");
 const settings = require("../assets/icons/settings.png");
 const logout = require("../assets/icons/sign-out.png");
-const arrowLeft = require("../assets/icons/arrow-left.png");
+const caretLeft = require("../assets/icons/caret-left.png");
+const outlineAdd = require("../assets/icons/outline-add.png");
+const arrowRight = require("../assets/icons/arrow-right.png");
+const bin = require("../assets/icons/delete.png");
+const mastercard = require("../assets/icons/mastercard.png");
 
 export default {
   home,
@@ -23,5 +27,9 @@ export default {
   support,
   settings,
   logout,
-  arrowLeft,
+  caretLeft,
+  outlineAdd,
+  arrowRight,
+  bin,
+  mastercard,
 };
