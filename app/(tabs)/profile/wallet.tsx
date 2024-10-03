@@ -9,14 +9,7 @@ export default function Wallet() {
       style={{ backgroundColor: "#fff", flex: 1 }}
       contentContainerStyle={styles.container}
     >
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 22,
-          marginBottom: 34,
-        }}
-      >
+      <View style={styles.overviewContainer}>
         <View style={styles.walletCard}>
           <View>
             <Text style={styles.walletBalance}>
@@ -40,18 +33,7 @@ export default function Wallet() {
         </View>
       </View>
 
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: 3,
-          paddingBottom: 5.4,
-          borderBottomWidth: 1,
-          borderBottomColor: "#C0C0C0",
-          marginBottom: 17,
-        }}
-      >
+      <View style={styles.transactions}>
         <Text style={{ fontSize: 16 }}>Transactions</Text>
         <IconButton
           icon={icons.arrowRight}
@@ -60,24 +42,9 @@ export default function Wallet() {
         />
       </View>
 
-      <Text
-        style={{
-          fontFamily: "Poppins_500Medium",
-          fontSize: 16,
-          marginBottom: 5,
-        }}
-      >
-        Cards
-      </Text>
+      <Text style={styles.cardsHeader}>Cards</Text>
 
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 17,
-        }}
-      >
+      <View style={styles.cardContainer}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 9 }}>
           <Icon source={icons.mastercard} size={16} />
           <Text style={{ fontFamily: "Poppins_500Medium", color: "#868686" }}>
@@ -102,7 +69,12 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 24,
     paddingBottom: 14,
-    // alignItems: "center",
+  },
+  overviewContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 22,
+    marginBottom: 34,
   },
   walletCard: {
     backgroundColor: "#111111",
@@ -125,4 +97,25 @@ const styles = StyleSheet.create({
     lineHeight: 11.4,
   },
   walletSubtitle: { color: "#fff", fontSize: 14.5, lineHeight: 17.5 },
+  transactions: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 3,
+    paddingBottom: 5.4,
+    borderBottomWidth: 1,
+    borderBottomColor: "#C0C0C0",
+    marginBottom: 17,
+  },
+  cardsHeader: {
+    fontFamily: "Poppins_500Medium",
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  cardContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 17,
+  },
 });

@@ -14,6 +14,9 @@ const outlineAdd = require("../assets/icons/outline-add.png");
 const arrowRight = require("../assets/icons/arrow-right.png");
 const bin = require("../assets/icons/delete.png");
 const mastercard = require("../assets/icons/mastercard.png");
+const circle = require("../assets/icons/circle.png");
+const edit = require("../assets/icons/edit.png");
+const info = require("../assets/icons/info.png");
 
 export default {
   home,
@@ -32,4 +35,7 @@ export default {
   arrowRight,
   bin,
   mastercard,
+  circle,
+  edit,
+  info,
 };
