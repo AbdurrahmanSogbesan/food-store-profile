@@ -12,13 +12,15 @@ export default function Wallet() {
       <View style={styles.overviewContainer}>
         <View style={styles.walletCard}>
           <View>
-            <Text style={styles.walletBalance}>
-              {new Intl.NumberFormat("en-NG", {
-                style: "currency",
-                currency: "NGN",
-              }).format(20000)}
+            <View style={{ flexDirection: "row", alignItems: "baseline" }}>
+              <Text style={styles.walletBalance}>
+                {new Intl.NumberFormat("en-NG", {
+                  style: "currency",
+                  currency: "NGN",
+                }).format(20000)}
+              </Text>
               <Text style={styles.walletBalanceCurrency}>NGN</Text>
-            </Text>
+            </View>
             <Text style={styles.walletSubtitle}>Available Balance</Text>
           </View>
         </View>

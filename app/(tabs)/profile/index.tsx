@@ -63,18 +63,12 @@ export default function Profile() {
       contentContainerStyle={styles.container}
     >
       <View style={{ gap: 7, marginBottom: 23, alignItems: "center" }}>
-        <Pressable
-          onPress={() => {
-            console.log("clicked");
-          }}
-        >
-          <Image
-            source={profileImage}
-            width={100}
-            height={100}
-            resizeMode="contain"
-          />
-        </Pressable>
+        <Image
+          source={profileImage}
+          width={100}
+          height={100}
+          resizeMode="contain"
+        />
         <Text style={{ fontSize: 12 }}>John Doe</Text>
       </View>
 

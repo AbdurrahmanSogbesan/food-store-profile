@@ -103,7 +103,7 @@ const $innerHeader: ViewStyle = { height: 98, backgroundColor: "#C3FBAB82" };
 
 const $innerHeaderContent: ViewStyle = {
   position: "absolute",
-  bottom: Platform.OS === "ios" ? 7 : 31,
+  bottom: Platform.OS !== "web" ? 7 : 31,
   left: 16,
   gap: 7,
   flexDirection: "row",

@@ -8,6 +8,7 @@ import {
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   configureFonts,
   MD2LightTheme,
@@ -40,7 +41,7 @@ export default function RootLayout() {
     default: {
       regular: {
         fontFamily: "Poppins_400Regular",
-        fontSize: "normal",
+        fontWeight: "normal",
       },
       medium: {
         fontFamily: "Poppins_600SemiBold",
@@ -72,12 +73,14 @@ export default function RootLayout() {
   };
 
   return (
-    <PaperProvider theme={theme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="(tabs)" />
-      </Stack>
-      <StatusBar style="dark" />
-    </PaperProvider>
+    <GestureHandlerRootView>
+      <PaperProvider theme={theme}>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="(tabs)" />
+        </Stack>
+        <StatusBar style="dark" />
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }

@@ -3,8 +3,6 @@ import React from "react";
 import { Button, View } from "react-native";
 
 export default function Index() {
-  const [text, setText] = React.useState("");
-
   return (
     <View
       style={{

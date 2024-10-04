@@ -17,6 +17,10 @@ const mastercard = require("../assets/icons/mastercard.png");
 const circle = require("../assets/icons/circle.png");
 const edit = require("../assets/icons/edit.png");
 const info = require("../assets/icons/info.png");
+const camera = require("../assets/icons/camera.png");
+const photo = require("../assets/icons/photo.png");
+const upload = require("../assets/icons/upload.png");
+const avatar = require("../assets/icons/avatar.png");
 
 export default {
   home,
@@ -38,4 +42,8 @@ export default {
   circle,
   edit,
   info,
+  camera,
+  photo,
+  upload,
+  avatar,
 };

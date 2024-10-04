@@ -1,30 +1,39 @@
 import {
+  ActivityIndicator,
   StyleProp,
   StyleSheet,
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
-import React from "react";
+import React, { ComponentProps } from "react";
 import { Text } from "react-native-paper";
+
+interface ButtonProps extends ComponentProps<typeof TouchableOpacity> {
+  text: string;
+  styles?: StyleProp<ViewStyle>;
+  isLoading?: boolean;
+}
 
 export default function Button({
   text,
-  onPress,
   styles,
-}: {
-  text: string;
-  onPress: VoidFunction;
-  styles?: StyleProp<ViewStyle>;
-}) {
+  isLoading,
+  ...props
+}: ButtonProps) {
   return (
     <TouchableOpacity
       style={[stylesheet.container, styles]}
-      onPress={onPress}
       activeOpacity={0.7}
+      disabled={isLoading}
+      {...props}
     >
-      <Text style={{ fontSize: 16, fontFamily: "Poppins_500Medium" }}>
-        {text}
-      </Text>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text style={{ fontSize: 16, fontFamily: "Poppins_500Medium" }}>
+          {text}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 }
