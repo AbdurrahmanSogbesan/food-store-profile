@@ -14,7 +14,8 @@ import { Icon, Text } from "react-native-paper";
 import icons from "@/constants/icons";
 import TextField from "@/components/TextField";
 import Button from "@/components/Button";
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import { KeyboardAvoidingView, Platform } from "react-native";
 
 const profileImage = require("@/assets/images/profile-image.png");
 
@@ -43,8 +44,8 @@ export default function Details() {
   const emailRef = useRef<TextInput>(null);
   const phoneRef = useRef<TextInput>(null);
 
-  const bottomSheetRef = useRef<BottomSheet>(null);
-  const bottomSheetRef2 = useRef<BottomSheet>(null);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const bottomSheetRef2 = useRef<BottomSheetModal>(null);
 
   const snapPoints = useMemo(() => ["20%"], []);
   const snapPoints2 = useMemo(() => ["30%", "40%"], []);
@@ -64,9 +65,9 @@ export default function Details() {
       icon: icons.avatar,
       text: "Choose Avatar",
       onPress: () => {
-        bottomSheetRef.current?.close();
+        bottomSheetRef.current?.dismiss();
         setTimeout(() => {
-          bottomSheetRef2.current?.expand();
+          bottomSheetRef2.current?.present();
         }, 400);
       },
     },
@@ -104,6 +105,7 @@ export default function Details() {
       <BottomSheetBackdrop
         appearsOnIndex={0}
         disappearsOnIndex={-1}
+        enableTouchThrough={false}
         {...props}
       />
     ),
@@ -111,108 +113,116 @@ export default function Details() {
   );
 
   return (
-    <ScrollView
-      style={{ backgroundColor: "#fff" }}
-      contentContainerStyle={styles.container}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={100}
     >
-      <Pressable
-        style={{ marginBottom: 25 }}
-        onPress={() => bottomSheetRef.current?.expand()}
+      <ScrollView
+        style={{ backgroundColor: "#fff" }}
+        contentContainerStyle={styles.container}
       >
-        <Avatar source={profileImage} size={100} />
-        <View style={styles.cameraIconContainer}>
-          <Icon source={icons.camera} size={14} />
+        <Pressable
+          style={{ marginBottom: 25 }}
+          onPress={() => bottomSheetRef.current?.present()}
+        >
+          <Avatar source={profileImage} size={100} />
+          <View style={styles.cameraIconContainer}>
+            <Icon source={icons.camera} size={14} />
+          </View>
+        </Pressable>
+
+        <View
+          style={{ flex: 1, justifyContent: "space-between", width: "100%" }}
+        >
+          <View style={{ gap: 20 }}>
+            <TextField
+              value={formData.firstName}
+              onChangeText={(text) => handleChange("firstName", text)}
+              label="First Name"
+              onSubmitEditing={() => lastNameRef.current?.focus()}
+            />
+            <TextField
+              ref={lastNameRef}
+              value={formData.lastName}
+              onChangeText={(text) => handleChange("lastName", text)}
+              label="Last Name"
+              onSubmitEditing={() => phoneRef.current?.focus()}
+            />
+            <TextField
+              ref={phoneRef}
+              value={formData.phone}
+              onChangeText={(text) => handleChange("phone", text)}
+              label="Phone Number"
+              keyboardType="number-pad"
+              onSubmitEditing={() => emailRef.current?.focus()}
+            />
+            <TextField
+              ref={emailRef}
+              value={formData.email}
+              onChangeText={(text) => handleChange("email", text)}
+              label="Email"
+              keyboardType="email-address"
+              onSubmitEditing={handleSubmit}
+            />
+          </View>
+
+          <Button
+            text="Update"
+            onPress={handleSubmit}
+            isLoading={isLoading}
+            styles={{ marginTop: 14 }}
+          />
         </View>
-      </Pressable>
 
-      <View style={{ flex: 1, justifyContent: "space-between", width: "100%" }}>
-        <View style={{ gap: 20 }}>
-          <TextField
-            value={formData.firstName}
-            onChangeText={(text) => handleChange("firstName", text)}
-            label="First Name"
-            onSubmitEditing={() => lastNameRef.current?.focus()}
-          />
-          <TextField
-            ref={lastNameRef}
-            value={formData.lastName}
-            onChangeText={(text) => handleChange("lastName", text)}
-            label="Last Name"
-            onSubmitEditing={() => phoneRef.current?.focus()}
-          />
-          <TextField
-            ref={phoneRef}
-            value={formData.phone}
-            onChangeText={(text) => handleChange("phone", text)}
-            label="Phone Number"
-            keyboardType="number-pad"
-            onSubmitEditing={() => emailRef.current?.focus()}
-          />
-          <TextField
-            ref={emailRef}
-            value={formData.email}
-            onChangeText={(text) => handleChange("email", text)}
-            label="Email"
-            keyboardType="email-address"
-            onSubmitEditing={handleSubmit}
-          />
-        </View>
-
-        <Button
-          text="Update"
-          onPress={handleSubmit}
-          isLoading={isLoading}
-          styles={{ marginTop: 14 }}
-        />
-      </View>
-
-      <BottomSheet
-        ref={bottomSheetRef}
-        snapPoints={snapPoints}
-        index={-1}
-        enablePanDownToClose
-        backdropComponent={renderBackdrop}
-        handleIndicatorStyle={styles.handleIndicatorStyle}
-      >
-        <View style={styles.editPhotoOptionsContainer}>
-          {editPhotoOptions.map(({ icon, onPress, text }, index) => (
-            <View style={{ alignItems: "center", gap: 3 }} key={index}>
-              <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
-                <Icon source={icon} size={28} />
-              </TouchableOpacity>
-              <Text style={{ fontSize: 10, color: "#626262" }}>{text}</Text>
-            </View>
-          ))}
-        </View>
-      </BottomSheet>
-
-      <BottomSheet
-        ref={bottomSheetRef2}
-        snapPoints={snapPoints2}
-        index={-1}
-        enablePanDownToClose
-        backdropComponent={renderBackdrop}
-        handleIndicatorStyle={styles.handleIndicatorStyle}
-      >
-        <View style={styles.avatarOptionsContainer}>
-          <Text style={{ fontSize: 15, marginBottom: 18 }}>
-            Choose your prefered Avatar
-          </Text>
-          <View style={styles.avatarOptions}>
-            {Array.from({ length: 8 }).map((_, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => console.log("Pressed")}
-                style={{ width: "24%", maxWidth: 60.49 }}
-                activeOpacity={0.7}
-              >
-                <Avatar source={profileImage} size={60.49} />
-              </TouchableOpacity>
+        <BottomSheetModal
+          ref={bottomSheetRef}
+          snapPoints={snapPoints}
+          index={0}
+          enablePanDownToClose
+          backdropComponent={renderBackdrop}
+          handleIndicatorStyle={styles.handleIndicatorStyle}
+        >
+          <View style={styles.editPhotoOptionsContainer}>
+            {editPhotoOptions.map(({ icon, onPress, text }, index) => (
+              <View style={{ alignItems: "center", gap: 3 }} key={index}>
+                <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+                  <Icon source={icon} size={28} />
+                </TouchableOpacity>
+                <Text style={{ fontSize: 10, color: "#626262" }}>{text}</Text>
+              </View>
             ))}
           </View>
-        </View>
-      </BottomSheet>
-    </ScrollView>
+        </BottomSheetModal>
+
+        <BottomSheetModal
+          ref={bottomSheetRef2}
+          snapPoints={snapPoints2}
+          index={0}
+          enablePanDownToClose
+          backdropComponent={renderBackdrop}
+          handleIndicatorStyle={styles.handleIndicatorStyle}
+        >
+          <View style={styles.avatarOptionsContainer}>
+            <Text style={{ fontSize: 15, marginBottom: 18 }}>
+              Choose your prefered Avatar
+            </Text>
+            <View style={styles.avatarOptions}>
+              {Array.from({ length: 8 }).map((_, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => console.log("Pressed")}
+                  style={{ width: "24%", maxWidth: 60.49 }}
+                  activeOpacity={0.7}
+                >
+                  <Avatar source={profileImage} size={60.49} />
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </BottomSheetModal>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 

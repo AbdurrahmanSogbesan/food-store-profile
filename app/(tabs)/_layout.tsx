@@ -60,6 +60,7 @@ export default function TabsLayout() {
             lineHeight: 48,
             paddingLeft: 12,
           },
+          tabBarHideOnKeyboard: true,
         })}
         initialRouteName="home"
       >
