@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { router, Stack } from "expo-router";
-import { Icon, IconButton } from "react-native-paper";
+import { IconButton } from "react-native-paper";
 import icons from "@/constants/icons";
 
 const InnerHeader = ({
