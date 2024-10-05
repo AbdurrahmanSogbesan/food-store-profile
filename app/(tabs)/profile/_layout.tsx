@@ -1,17 +1,10 @@
-import {
-  Text,
-  View,
-  Pressable,
-  Platform,
-  ViewStyle,
-  TextStyle,
-} from "react-native";
+import { Text, View, Platform, ViewStyle, TextStyle } from "react-native";
 
 import { router, Stack } from "expo-router";
 import { IconButton } from "react-native-paper";
 import icons from "@/constants/icons";
 
-const InnerHeader = ({
+export const InnerHeader = ({
   title,
   styles,
 }: {
@@ -66,7 +59,7 @@ export default function ProfileLayout() {
       <Stack.Screen
         name="shopping-list"
         options={{
-          header: () => <InnerHeader title="Shopping List" />,
+          headerShown: false,
         }}
       />
       <Stack.Screen

@@ -21,6 +21,10 @@ const camera = require("../assets/icons/camera.png");
 const photo = require("../assets/icons/photo.png");
 const upload = require("../assets/icons/upload.png");
 const avatar = require("../assets/icons/avatar.png");
+const shuffle = require("../assets/icons/shuffle.png");
+const menu = require("../assets/icons/menu.png");
+const plus = require("../assets/icons/plus.png");
+const minus = require("../assets/icons/minus.png");
 
 export default {
   home,
@@ -46,4 +50,8 @@ export default {
   photo,
   upload,
   avatar,
+  shuffle,
+  menu,
+  plus,
+  minus,
 };
